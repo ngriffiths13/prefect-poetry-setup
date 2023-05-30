@@ -23,7 +23,7 @@ definitions:
 
 
 deployments:
-- name: my_"{{ project_name|replace('-', '_') }}"_deployment
+- name: my_{{ project_name|replace('-', '_') }}_deployment
   version: 1
   tags: []
   description: Put your deployment description here
@@ -31,7 +31,7 @@ deployments:
   # The entrypoint is the path to the flow function.
   # The format is <path_to_flow_file>:<flow_function_name>
   # This is just an example
-  entrypoint: "{{ project_name|replace('-', '_') }}"/"{{ project_name|replace('-', '_') }}"_flow.py:"{{ project_name|replace('-', '_') }}"_flow
+  entrypoint: {{ project_name|replace('-', '_') }}/{{ project_name|replace('-', '_') }}_flow.py:{{ project_name|replace('-', '_') }}_flow
   parameters: {}
   {% if deployment_infrastructure == 'Google Cloud Run' %}
   work_pool: *cloud-run-pool

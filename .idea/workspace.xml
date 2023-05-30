@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de57a30d-9540-4f86-ae9f-96923173ef5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/&quot;{{ project_name|replace('-', '_') }}&quot;/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/{{ project_name|replace('-', '_') }}/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/poetry-prefect.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/justfile.jinja" beforeDir="false" afterPath="$PROJECT_DIR$/justfile.jinja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prefect.yaml.jinja" beforeDir="false" afterPath="$PROJECT_DIR$/prefect.yaml.jinja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/{% if ci_cd_pipelines == 'Github Actions' %}.github{% endif %}/workflows/publish.yml.jinja" beforeDir="false" afterPath="$PROJECT_DIR$/{% if ci_cd_pipelines == 'Github Actions' %}.github{% endif %}/workflows/publish.yml.jinja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/{% if deployment_infrastructure != 'Process' %}Dockerfile.jinja{% endif %}" beforeDir="false" afterPath="$PROJECT_DIR$/{% if deployment_infrastructure != 'Process' %}Dockerfile{% endif %}.jinja" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +38,7 @@
     "ACTIVE_CLOUD_PROJECT_NUMBER": "359524723465",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230530_0009",
+    "com.google.cloudcode.ide_session_index": "20230530_0010",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/nelsong/personal/prefect-poetry-setup",
     "node.js.detected.package.eslint": "true",
@@ -66,7 +61,7 @@
       <workItem from="1685125220086" duration="4806000" />
       <workItem from="1685148842146" duration="6928000" />
       <workItem from="1685446448243" duration="2707000" />
-      <workItem from="1685462635961" duration="1418000" />
+      <workItem from="1685462635961" duration="3719000" />
     </task>
     <servers />
   </component>

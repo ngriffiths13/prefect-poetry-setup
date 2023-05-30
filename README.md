@@ -6,6 +6,7 @@
 - Ensure that [just](https://just.systems/man/en/) is installed
 - From your local repository run `copier https://github.com/ngriffiths13/prefect-poetry-setup.git .`
 - Answer the questions that copier asks you and you should be good to go!
+- Check the [Post-Setup](#post-setup) section for some additional steps you may want to take
 
 ## Description
 This is a project structure setup according to my own biases and preferences but is hopefully helpful
@@ -58,3 +59,20 @@ The repository is set up with the following tools and files:
 - CI/CD files will be created to help with checking tests and linting, along with deploying projects.
 - [Docker](https://docs.docker.com/get-started/) files will be created to help with building and deploying docker images. A multistage build Dockerfile is included to help cut image size down.
 - [Noxfile](https://nox.thea.codes/en/stable/) will be created to help with running tests locally in a clean environment.
+
+## Post-Setup <a name="post-setup"></a>
+### Secrets and Environment Variables
+Depending on your setup you will need to add some secrets and environment variables to your repository.
+They are organized based on the tools you choose to use.
+
+**Github Actions**
+- *Github Secrets*:
+  - `PREFECT_API_KEY`
+  - `PREFECT_WORKSPACE`
+- *Prefect Secrets Block*:
+  - `github-access-token`
+
+**Dockerhub**
+- *Github Secrets*:
+  - `DOCKERHUB_USERNAME`
+  - `DOCKERHUB_TOKEN`
