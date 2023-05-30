@@ -6,17 +6,17 @@ create-requirements:
 setup-repo: && create-requirements
     poetry add --group dev nox pre-commit pytest pytest-cov ruff
     poetry add prefect
-    {%- if storage_type == 'Github' -%}
+    {% if storage_type == 'Github' %}
     poetry add prefect-github
-    {%- endif -%}
-    {% if deployment_infrastructure == 'Google Cloud Run' or storage_type == 'Google Cloud Storage' %}
+    {%- endif %}
+    {% if deployment_infrastructure == 'Google Cloud Run' or storage_type == 'Google Cloud Storage' -%}
     poetry add prefect-gcp
-    {%- endif -%}
+    {%- endif %}
     poetry install -v
-    {%- if include_precommit -%}
+    {% if include_precommit -%}
     poetry run pre-commit install
     poetry run pre-commit autoupdate
-    {%- endif -%}
+    {%- endif %}
 
 # Create default work pool
 create-work-pool:
