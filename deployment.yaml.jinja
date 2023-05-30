@@ -1,0 +1,42 @@
+definitions:
+    work_pools:
+        {% if deployment_infrastructure == 'Google Cloud Run' %}
+        cloud-run-pool: &cloud-run-pool
+            name: cloud-run-pool
+            work_queue_name: default
+            job_variables:
+                image: "{{ image_name }}"
+                docker-pool: &docker-pool
+        {% endif %}
+        {% if deployment_infrastructure == 'Docker' %}
+        docker-pool: &docker-pool
+            name: docker-pool
+            work_queue_name: default
+            job_variables:
+                image: "{{ image_name }}"
+        {% endif %}
+        {% if deployment_infrastructure == 'Process' %}
+        process-pool: &process-pool
+            name: process-pool
+            work_queue_name: default
+        {% endif %}
+
+
+deployments:
+- name: my_"{{ project_name|replace('-', '_') }}"_deployment
+  version: 1
+  tags: []
+  description: Put your deployment description here
+  schedule: {}
+  # The entrypoint is the path to the flow function.
+  # The format is <path_to_flow_file>:<flow_function_name>
+  # This is just an example
+  entrypoint: "{{ project_name|replace('-', '_') }}"/"{{ project_name|replace('-', '_') }}"_flow.py:"{{ project_name|replace('-', '_') }}"_flow
+  parameters: {}
+  {% if deployment_infrastructure == 'Google Cloud Run' %}
+  work_pool: *cloud-run-pool
+  {% elif deployment_infrastructure == 'Docker' %}
+  work_pool: *docker-pool
+  {% elif deployment_infrastructure == 'Process' %}
+  work_pool: *process-pool
+  {% endif %}

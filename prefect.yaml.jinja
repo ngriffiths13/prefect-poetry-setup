@@ -1,0 +1,24 @@
+# File for configuring project / deployment build, push and pull steps
+
+# Generic metadata about this project
+name: {{ project_name }}
+prefect-version: 2.10.11
+
+# You can definitely push your docker image here instead of in CI/CD if you choose.
+# Checkout out the prefect docs for more info on how to do that.
+build:
+- prefect_docker.projects.steps.build_docker_image:
+    requires: prefect-docker>=0.2.0
+    image_name: my-repo/my-image
+    tag: my-tag
+    dockerfile: auto
+    push: true
+
+push: null
+
+# pull section allows you to provide instructions for cloning this project in remote locations
+pull:
+- prefect.projects.steps.git_clone_project:
+    repository: https://github.com/{{ github_repo }}.git
+    branch: main
+    access_token: {% raw %}'{{ prefect.blocks.secret.github-access-token }}'{% endraw %}

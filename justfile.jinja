@@ -1,0 +1,62 @@
+# Create requirements files for both project and build
+create-requirements:
+    poetry export -o requirements.txt --only=main --without-hashes
+
+# Run all repo setup
+setup-repo: && create-requirements
+    poetry add --group dev nox pre-commit pytest pytest-cov ruff
+    poetry add prefect
+    {%- if storage_type == 'Github' -%}
+    poetry add prefect-github
+    {%- endif -%}
+    {% if deployment_infrastructure == 'Google Cloud Run' or storage_type == 'Google Cloud Storage' %}
+    poetry add prefect-gcp
+    {%- endif -%}
+    poetry install -v
+    {%- if include_precommit -%}
+    poetry run pre-commit install
+    poetry run pre-commit autoupdate
+    {%- endif -%}
+
+# Create default work pool
+create-work-pool:
+    poetry run prefect work-pool create \
+    {% if deployment_infrastructure == 'Google Cloud Run' -%}
+    cloud-run-pool --type cloud-run
+    {% elif deployment_infrastructure == 'Docker' -%}
+    docker-pool --type docker
+    {% elif deployment_infrastructure == 'Process' -%}
+    process-pool --type process
+    {%- endif %}
+
+# Run tests via nox
+test:
+    poetry run nox -s tests
+
+# Run linting live and see how changes made effect outputs
+live-lint:
+    poetry run ruff . --fix --watch
+
+# Format all files using black
+format:
+    poetry run black .
+
+# Lint repo using pre-commit hooks
+lint: format
+    poetry run ruff . --fix
+
+
+# Run pre-commit hooks
+pre-commit:
+    poetry run pre-commit run --all
+
+{% if deployment_infrastructure != 'Process' %}
+home_dir := env_var('HOME')
+# Build Docker Image
+build-docker:
+    docker build . -t {{ docker_registry }}/{{ project_name }} --platform linux/amd64
+
+# Push Docker Image
+push-docker:
+    docker push {{ docker_registry }}/{{ project_name }}:latest
+{% endif %}

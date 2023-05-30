@@ -1,0 +1,86 @@
+# Questions
+project_name:
+  type: str
+  help: What is the name of your project?
+
+project_description:
+  type: str
+  help: Description of project.
+  default: ""
+
+author:
+  type: str
+  help: Name of repository creator
+
+author_email:
+  type: str
+  help: Email address of repository creator
+
+storage_type:
+  type: str
+  choices:
+    - "Github"
+#    - "Google Cloud Storage"
+  help: Where do you want to store your code for deployments?
+
+github_repo:
+  type: str
+  when: "{% if storage_type == 'Github' %}true{% endif %}"
+  help: What is the name of your github repo?
+  placeholder: "e.g. github-username/repo-name"
+
+deployment_infrastructure:
+  type: str
+  choices:
+    - "Process"
+    - "Docker"
+#    - "Google Cloud Run"
+  help: Where do you want to run your code for deployments?
+
+ci_cd_pipelines:
+  type: str
+  choices:
+    - "Github Actions"
+#    - "Google Cloud Build"
+    - "None"
+  help: What CI/CD pipeline do you want to use?
+
+docker_registry_type:
+  type: str
+  help: What type of docker registry do you want to use? Currently only DockerHub is supported.
+  choices:
+    - "DockerHub"
+
+docker_registry:
+  type: str
+  when: "{% if deployment_infrastructure != 'Process' %}true{% endif %}"
+  help: What is the name of your docker registry? Don't include any image names.
+  placeholder: "e.g. dockerhub-username or us-east1-docker.pkg.dev/project-name/registry-name"
+
+package_name:
+  type: str
+  help: What is the name of your package?
+  default: "{{ project_name|replace('-', '_') }}"
+  validator: "{% if '-' in package_name %}Please replace hyphens with underscores{% endif %}"
+  when: false
+
+include_precommit:
+  type: bool
+  help: Do you want to include pre-commit hooks?
+  default: true
+
+_exclude:
+  - copier.yaml
+  - copier.yml
+  - ~*
+  - "*.py[co]"
+  - __pycache__
+  - .git
+  - .DS_Store
+  - .sv
+  - README.md
+  - .idea
+
+_tasks:
+  - "touch README.md"
+  - "just setup-repo"
