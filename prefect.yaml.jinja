@@ -4,16 +4,18 @@
 name: {{ project_name }}
 prefect-version: 2.10.11
 
-# You can definitely push your docker image here instead of in CI/CD if you choose.
-# Checkout out the prefect docs for more info on how to do that.
+{% if deployment_infrastructure != 'Process' -%}
 build:
+# If you have any need for buildkit you will need to build your docker image in CI/CD instead of here.
 - prefect_docker.projects.steps.build_docker_image:
     requires: prefect-docker>=0.2.0
-    image_name: my-repo/my-image
-    tag: my-tag
+    image_name: {{ docker_registry }}/{{ project_name }}
+    tag: latest
     dockerfile: Dockerfile
     push: true
-
+{% else -%}
+build: null
+{% endif %}
 push: null
 
 # pull section allows you to provide instructions for cloning this project in remote locations
@@ -21,4 +23,4 @@ pull:
 - prefect.projects.steps.git_clone_project:
     repository: https://github.com/{{ github_repo }}.git
     branch: main
-    access_token: {% raw %}'{{ prefect.blocks.secret.github-access-token }}'{% endraw %}
+    access_token: {% raw %}'{{ prefect.blocks.secret.github-access-token }}'{% endraw %}  # TODO: Create this secret block in Prefect Cloud

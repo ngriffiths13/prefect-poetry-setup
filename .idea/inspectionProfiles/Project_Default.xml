@@ -1,0 +1,29 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="keyrings.google-artifactregistry-auth" />
+            <item index="1" class="java.lang.String" itemvalue="build" />
+            <item index="2" class="java.lang.String" itemvalue="twine" />
+            <item index="3" class="java.lang.String" itemvalue="pre-commit" />
+            <item index="4" class="java.lang.String" itemvalue="tox" />
+            <item index="5" class="java.lang.String" itemvalue="ruff" />
+            <item index="6" class="java.lang.String" itemvalue="rich" />
+            <item index="7" class="java.lang.String" itemvalue="falcon-dr" />
+            <item index="8" class="java.lang.String" itemvalue="strategylib-dr" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="typing.Coroutine.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
