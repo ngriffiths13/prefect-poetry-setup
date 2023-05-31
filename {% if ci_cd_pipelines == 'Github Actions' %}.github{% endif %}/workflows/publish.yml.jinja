@@ -30,15 +30,28 @@ jobs:
       - uses: docker/login-action@v2
         with:
         {%- raw %}
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}  # TODO: Add secret to github actions
+          password: ${{ secrets.DOCKERHUB_TOKEN }}  # TODO: Add secret to github actions
         {%- endraw %}
+      {% elif docker_registry_type == 'Google Artifact Registry' -%}
+      # See https://github.com/google-github-actions/auth#setting-up-workload-identity-federation for setting up auth
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '<workload_identity_provider>'  # TODO: replace with your provider
+          service_account: '<service_account>'  # TODO: replace with your service account
+      - uses: docker/login-action@v2
+        with:
+          registry: {{ google-ar-region }}-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
       {%- endif %}
       {%- endif %}
       - uses: PrefectHQ/actions-prefect-auth@v1
         with:
           {% raw -%}
-          prefect-api-key: ${{ secrets.PREFECT_API_KEY }}
-          prefect-workspace: ${{ secrets.PREFECT_WORKSPACE }}
+          prefect-api-key: ${{ secrets.PREFECT_API_KEY }}  # TODO: Add secret to github actions
+          prefect-workspace: ${{ secrets.PREFECT_WORKSPACE }}  # TODO: Add secret to github actions
           {%- endraw %}
       - run: poetry run prefect deploy --all
