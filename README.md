@@ -31,7 +31,7 @@ deploying prefect.
 - [x] Docker
 - [ ] Kubernetes
 - [ ] ECS
-- [ ] Google Cloud Run
+- [x] Google Cloud Run
 
 ### CI/CD
 - [x] Github Actions
@@ -44,7 +44,7 @@ deploying prefect.
 - [ ] Github Container Registry
 - [ ] AWS ECR
 - [ ] Google Container Registry
-- [ ] Google Artifact Registry
+- [x] Google Artifact Registry
 
 ## Usage
 The repository is set up with the following tools and files:
