@@ -6,6 +6,7 @@
 - Ensure that [just](https://just.systems/man/en/) is installed
 - From your local repository run `copier https://github.com/ngriffiths13/prefect-poetry-setup.git .`
 - Answer the questions that copier asks you and you should be good to go!
+- Find all the places in the repo marked with `#TODO` and fill in the appropriate values
 - Check the [Post-Setup](#post-setup) section for some additional steps you may want to take
 
 ## Description

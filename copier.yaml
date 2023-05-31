@@ -34,7 +34,7 @@ deployment_infrastructure:
   choices:
     - "Process"
     - "Docker"
-#    - "Google Cloud Run"
+    - "Google Cloud Run"
   help: Where do you want to run your code for deployments?
 
 ci_cd_pipelines:
@@ -50,6 +50,25 @@ docker_registry_type:
   help: What type of docker registry do you want to use? Currently only DockerHub is supported.
   choices:
     - "DockerHub"
+    - "Google Artifact Registry"
+
+google_ar_region:
+  type: str
+  help: Which region is your Google Artifact Registry located in?
+  choices:
+    - "northamerica-northeast1"
+    - "northamerica-northeast2"
+    - "us-central1"
+    - "us-east1"
+    - "us-east4"
+    - "us-east5"
+    - "us-south1"
+    - "us-west1"
+    - "us-west2"
+    - "us-west3"
+    - "us-west4"
+    - "other (if you choose this one you will need to go update config files manually)"
+  when: "{% if docker_registry_type == 'Google Artifact Registry' %}true{% endif %}"
 
 docker_registry:
   type: str
